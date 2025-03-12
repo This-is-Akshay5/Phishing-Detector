@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Detector</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Phishing Detector</h1>
+
+        <div class="input-box">
+            <h2>Check URL:</h2>
+            <input type="text" id="urlInput" placeholder="Enter URL...">
+            <button onclick="checkURL()">Check</button>
+            <p id="urlResult"></p>
+        </div>
+
+        <div class="input-box">
+            <h2>Check Email:</h2>
+            <input type="text" id="emailInput" placeholder="Enter Email...">
+            <button onclick="checkEmail()">Check</button>
+            <p id="emailResult"></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1e1e2f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #4caf50;
+        }
+
+        .container {
+            background: #2a2a3b;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+            max-width: 400px;
+            margin: auto;
+        }
+
+        input {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 10px;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Phishing Detector</h1>
+    <div class="container">
+        <input type="text" id="userInput" placeholder="Enter URL or Email">
+        <button onclick="checkInput()">Check</button>
+        <div class="loading" id="loading">⏳ Checking...</div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function checkInput() {
+            const input = document.getElementById("userInput").value;
+            const resultDiv = document.getElementById("result");
+            const loadingDiv = document.getElementById("loading");
+
+            if (!input) {
+                resultDiv.innerHTML = "⚠️ Please enter a URL or Email!";
+                return;
+            }
+
+            loadingDiv.style.display = "block";
+            resultDiv.innerHTML = "";
+
+            const response = await fetch("/check", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ input })
+            });
+
+            const data = await response.json();
+            loadingDiv.style.display = "none";
+            resultDiv.innerHTML = data.message;
+        }
+    </script>
+</body>
+</html>
